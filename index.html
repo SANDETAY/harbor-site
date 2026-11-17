@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Harbor: the family’s day, in one place</title>
+  <meta name="description" content="Harbor is an iPhone app for the parent who already holds the calendar, the meals, and the lists. Join the waitlist.">
+  <link rel="icon" type="image/svg+xml" href="assets/harbor-mark.svg">
+  <style>
+    @font-face {
+      font-family: "Fraunces";
+      src: url("assets/fonts/Fraunces-Variable.ttf") format("truetype");
+      font-weight: 100 900;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: "IBM Plex Sans";
+      src: url("assets/fonts/IBMPlexSans-Variable.ttf") format("truetype");
+      font-weight: 100 900;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    :root {
+      --navy: #10243e;
+      --navy-deep: #0b1a2e;
+      --navy-mid: #1c3b5c;
+      --paper: #f6f4ef;
+      --white: #ffffff;
+      --ink: #132033;
+      --muted: #5a6570;
+      --line: #d8d4cb;
+      --focus: #2a5a86;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: var(--paper);
+      color: var(--ink);
+    }
+
+    body {
+      font-family: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      font-size: 1.0625rem;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      font-variant-ligatures: none;
+      font-feature-settings: "liga" 0, "dlig" 0, "clig" 0, "calt" 0;
+    }
+
+    .wordmark,
+    h1,
+    .benefits h2,
+    .why p {
+      font-family: "Fraunces", "Iowan Old Style", Palatino, "Palatino Linotype", Georgia, "Times New Roman", serif;
+      font-variant-ligatures: none;
+      font-feature-settings: "liga" 0, "dlig" 0, "clig" 0, "calt" 0;
+      font-variation-settings: "WONK" 0, "SOFT" 0;
+      font-optical-sizing: auto;
+    }
+
+    a { color: var(--navy-mid); }
+
+    .wrap {
+      width: min(40rem, calc(100% - 2.5rem));
+      margin: 0 auto;
+      padding: 2rem 0 3.5rem;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 2.75rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .brand img {
+      width: 2.25rem;
+      height: 2.25rem;
+      display: block;
+    }
+
+    .wordmark {
+      font-family: Fraunces, "Iowan Old Style", Palatino, Georgia, serif;
+      font-weight: 560;
+      font-size: 1.15rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--navy);
+    }
+
+    .nav-cta {
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--navy);
+      text-decoration: none;
+      border: 1px solid var(--line);
+      background: var(--white);
+      border-radius: 0.55rem;
+      padding: 0.5rem 0.85rem;
+      white-space: nowrap;
+    }
+
+    .nav-cta:hover { border-color: var(--navy-mid); }
+
+    h1 {
+      font-weight: 560;
+      font-size: clamp(2.05rem, 8vw, 3.15rem);
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin: 0 0 0.9rem;
+      color: var(--navy-deep);
+      font-variation-settings: "WONK" 0, "SOFT" 0, "opsz" 48;
+    }
+
+    .lede {
+      margin: 0 0 1.75rem;
+      color: var(--muted);
+      font-size: 1.125rem;
+      max-width: 32rem;
+    }
+
+    .cta {
+      display: inline-block;
+      border: 0;
+      background: var(--navy);
+      color: var(--white);
+      font-weight: 600;
+      font-size: 1.05rem;
+      text-decoration: none;
+      border-radius: 0.55rem;
+      padding: 0.95rem 1.25rem;
+    }
+
+    .cta:hover { background: var(--navy-mid); }
+
+    .cta:focus {
+      outline: 2px solid var(--focus);
+      outline-offset: 2px;
+    }
+
+    .cta-note {
+      margin: 0.75rem 0 2.75rem;
+      font-size: 0.88rem;
+      color: var(--muted);
+    }
+
+    .benefits {
+      list-style: none;
+      margin: 0 0 2.5rem;
+      padding: 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .benefits li {
+      padding: 1.15rem 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .benefits h2 {
+      font-size: 1.2rem;
+      font-weight: 560;
+      margin: 0 0 0.3rem;
+      color: var(--navy-deep);
+    }
+
+    .benefits p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .why {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 0.85rem;
+      padding: 1.25rem 1.25rem 1.3rem;
+      margin: 0 0 2.75rem;
+    }
+
+    .why h2 {
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--navy-mid);
+      margin: 0 0 0.55rem;
+    }
+
+    .why p {
+      margin: 0;
+      font-size: 1.15rem;
+      line-height: 1.45;
+      color: var(--navy-deep);
+    }
+
+    footer {
+      margin-top: 0.25rem;
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    footer a { color: var(--navy-mid); }
+
+    @media (min-width: 620px) {
+      .wrap { padding-top: 2.75rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <a class="brand" href="./">
+        <img src="assets/harbor-mark.svg" width="36" height="36" alt="">
+        <span class="wordmark">Harbor</span>
+      </a>
+      <a class="nav-cta" href="waitlist/">Join the waitlist</a>
+    </header>
+
+    <main>
+      <h1>The family’s day,<br>in one place.</h1>
+      <p class="lede">Harbor is an iPhone app for the parent who already holds the calendar, the meals, and the lists.</p>
+
+      <a class="cta" href="waitlist/">Join the waitlist</a>
+      <p class="cta-note">No account is created yet. We’ll email you when a public beta is ready. Price is not set.</p>
+
+      <ul class="benefits">
+        <li>
+          <h2>See today at a glance</h2>
+          <p>The Daily Brief, and an optional lock screen widget, show what’s next so the day is not stuck in one person’s head.</p>
+        </li>
+        <li>
+          <h2>Share one family calendar</h2>
+          <p>Import a .ics file, or connect Google Calendar (read-only; this may require Harbor Pro). Both adults in the household can see the same plan. Outlook is not supported yet.</p>
+        </li>
+        <li>
+          <h2>Keep the rest of the week together</h2>
+          <p>Tasks and chores, weekly meals and recipes, the grocery list, bills, subscriptions, and a simple budget live in one app.</p>
+        </li>
+      </ul>
+
+      <section class="why" aria-labelledby="why-title">
+        <h2 id="why-title">Why I built it</h2>
+        <p>I built Harbor as a stay-at-home dad of three. I wanted our household’s day to live in one place, not across texts, notes, and my own memory.</p>
+      </section>
+    </main>
+
+    <footer>
+      Harbor is in TestFlight beta. A public beta is coming later. <a href="waitlist/">Join the waitlist</a>.
+    </footer>
+  </div>
+</body>
+</html>
