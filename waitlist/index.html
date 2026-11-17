@@ -8,9 +8,17 @@
   <link rel="icon" type="image/svg+xml" href="../assets/harbor-mark.svg">
   <style>
     @font-face {
-      font-family: "Fraunces";
-      src: url("../assets/fonts/Fraunces-Variable.ttf?v=2") format("truetype");
-      font-weight: 100 900;
+      font-family: "IBM Plex Serif";
+      src: url("../assets/fonts/IBMPlexSerif-Medium.ttf") format("truetype");
+      font-weight: 500;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: "IBM Plex Serif";
+      src: url("../assets/fonts/IBMPlexSerif-SemiBold.ttf") format("truetype");
+      font-weight: 600;
       font-style: normal;
       font-display: swap;
     }
@@ -54,16 +62,15 @@
       font-feature-settings: "liga" 0, "dlig" 0, "clig" 0, "calt" 0;
     }
 
-    /* Fraunces' default WONK axis and discretionary ligatures can distort f/fa/fi. */
+    /* Headline serif. */
     .wordmark,
     h1,
     .benefits h2,
     .why p,
     .faq h2 {
-      font-family: "Fraunces", "Iowan Old Style", Palatino, "Palatino Linotype", Georgia, "Times New Roman", serif;
+      font-family: "IBM Plex Serif", Georgia, "Times New Roman", serif;
       font-variant-ligatures: none;
       font-feature-settings: "liga" 0, "dlig" 0, "clig" 0, "calt" 0;
-      font-variation-settings: "WONK" 0, "SOFT" 0;
       font-optical-sizing: auto;
     }
 
@@ -101,8 +108,8 @@
     }
 
     .wordmark {
-      font-family: Fraunces, "Iowan Old Style", Palatino, Georgia, serif;
-      font-weight: 560;
+      font-family: "IBM Plex Serif", Georgia, serif;
+      font-weight: 600;
       font-size: 1.15rem;
       letter-spacing: 0.08em;
       text-transform: uppercase;
@@ -110,8 +117,8 @@
     }
 
     h1 {
-      font-family: "Fraunces", "Iowan Old Style", Palatino, "Palatino Linotype", Georgia, "Times New Roman", serif;
-      font-weight: 560;
+      font-family: "IBM Plex Serif", Georgia, "Times New Roman", serif;
+      font-weight: 600;
       font-size: clamp(2.05rem, 8vw, 3.15rem);
       line-height: 1.15;
       letter-spacing: -0.02em;
@@ -119,7 +126,6 @@
       color: var(--navy-deep);
       font-variant-ligatures: none;
       font-feature-settings: "liga" 0, "dlig" 0, "clig" 0, "calt" 0;
-      font-variation-settings: "WONK" 0, "SOFT" 0, "opsz" 48;
     }
 
     .lede {
@@ -207,9 +213,9 @@
     }
 
     .benefits h2 {
-      font-family: Fraunces, "Iowan Old Style", Palatino, Georgia, serif;
+      font-family: "IBM Plex Serif", Georgia, serif;
       font-size: 1.2rem;
-      font-weight: 560;
+      font-weight: 600;
       margin: 0 0 0.3rem;
       color: var(--navy-deep);
     }
@@ -238,16 +244,16 @@
 
     .why p {
       margin: 0;
-      font-family: Fraunces, "Iowan Old Style", Palatino, Georgia, serif;
+      font-family: "IBM Plex Serif", Georgia, serif;
       font-size: 1.15rem;
       line-height: 1.45;
       color: var(--navy-deep);
     }
 
     .faq h2 {
-      font-family: Fraunces, "Iowan Old Style", Palatino, Georgia, serif;
+      font-family: "IBM Plex Serif", Georgia, serif;
       font-size: 1.35rem;
-      font-weight: 560;
+      font-weight: 600;
       margin: 0 0 0.75rem;
       color: var(--navy-deep);
     }
