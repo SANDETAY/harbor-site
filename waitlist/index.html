@@ -67,6 +67,37 @@
     h1,
     .benefits h2,
     .why p,
+    .how h2,
+    .how {
+      margin: 0 0 2.75rem;
+    }
+
+    .how h2 {
+      font-size: 1.35rem;
+      font-weight: 600;
+      margin: 0 0 0.75rem;
+      color: var(--navy-deep);
+    }
+
+    .how p {
+      margin: 0 0 0.85rem;
+      color: var(--muted);
+    }
+
+    .how ol {
+      margin: 0 0 0.85rem;
+      padding-left: 1.25rem;
+      color: var(--muted);
+    }
+
+    .how li {
+      margin: 0 0 0.55rem;
+    }
+
+    .how li:last-child {
+      margin-bottom: 0;
+    }
+
     .faq h2 {
       font-family: "IBM Plex Serif", Georgia, "Times New Roman", serif;
       font-variant-ligatures: none;
@@ -358,9 +389,21 @@
           <input id="email" name="email" type="email" autocomplete="email" required placeholder="you@example.com">
           <button type="submit">Join the waitlist</button>
         </div>
-        <p class="form-note">No account is created yet. We’ll email you when a public beta is ready. Price is not set.</p>
+        <p class="form-note">No account is created yet. We’ll email you a TestFlight invite within a couple of days. The beta is free; the price is not set.</p>
         <p class="form-status" id="form-status" hidden data-visible="false" role="status" aria-live="polite"></p>
       </form>
+
+
+      <section class="how" aria-labelledby="how-title">
+        <h2 id="how-title">How the beta works</h2>
+        <p>Harbor is in a free TestFlight beta for iPhone. The price is not set, and nothing is charged during the beta.</p>
+        <ol>
+          <li>Join this list with your email, and you’ll get a TestFlight invite within a couple of days. Or join now with the public TestFlight link: <a href="https://testflight.apple.com/join/psjNQTb4">testflight.apple.com/join/psjNQTb4</a>.</li>
+          <li>Use it in a real week for two to three weeks. A second adult in the house can join with an invite code.</li>
+          <li>Send feedback by replying to the invite email, emailing <a href="mailto:harboradmin@gmail.com">harboradmin@gmail.com</a>, or using TestFlight’s built-in feedback (take a screenshot and send it).</li>
+        </ol>
+        <p>You can stop anytime.</p>
+      </section>
 
       <ul class="benefits">
         <li>
@@ -394,7 +437,7 @@
         </details>
         <details>
           <summary>How much does it cost?</summary>
-          <p>The price is not set yet. If you join the waitlist, we will tell you the price before anything is charged.</p>
+          <p>The TestFlight beta is free. The price after launch is not set yet. If you join the waitlist, we will tell you the price before anything is charged.</p>
         </details>
         <details>
           <summary>What about our family’s privacy?</summary>
@@ -404,7 +447,7 @@
     </main>
 
     <footer>
-      Harbor is in TestFlight beta. A public beta is coming later.
+      Harbor is in a free TestFlight beta.
     </footer>
   </div>
 
@@ -428,7 +471,7 @@
 
         var honeypot = form.querySelector('input[name="website"]');
         if (honeypot && honeypot.value) {
-          show("You’re on the list. We’ll email you when a public beta is ready.");
+          show("You’re on the list. We’ll email you a TestFlight invite within a couple of days.");
           form.reset();
           return;
         }
@@ -453,7 +496,7 @@
           body: JSON.stringify({ email: email, source: "waitlist_page" })
         }).then(function (res) {
           if (res.ok) {
-            show("You’re on the list. We’ll email you when a public beta is ready.");
+            show("You’re on the list. We’ll email you a TestFlight invite within a couple of days.");
             form.email.value = "";
             return;
           }
