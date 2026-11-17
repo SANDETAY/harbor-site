@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Harbor: the family day, in one place</title>
+  <meta name="description" content="Harbor is an iPhone app for the parent who already holds the calendar, the meals, and the lists. Join the waitlist.">
+  <link rel="icon" type="image/svg+xml" href="../assets/harbor-mark.svg">
+  <style>
+    @font-face {
+      font-family: "Fraunces";
+      src: url("../assets/fonts/Fraunces-Variable.ttf") format("truetype");
+      font-weight: 100 900;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: "IBM Plex Sans";
+      src: url("../assets/fonts/IBMPlexSans-Variable.ttf") format("truetype");
+      font-weight: 100 900;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    :root {
+      --navy: #10243e;
+      --navy-deep: #0b1a2e;
+      --navy-mid: #1c3b5c;
+      --paper: #f6f4ef;
+      --white: #ffffff;
+      --ink: #132033;
+      --muted: #5a6570;
+      --line: #d8d4cb;
+      --focus: #2a5a86;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: var(--paper);
+      color: var(--ink);
+    }
+
+    body {
+      font-family: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      font-size: 1.0625rem;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      font-variant-ligatures: none;
+      font-feature-settings: "liga" 0, "dlig" 0, "clig" 0, "calt" 0;
+    }
+
+    /* Fraunces' default WONK axis and discretionary ligatures can distort f/fa/fi. */
+    .wordmark,
+    h1,
+    .benefits h2,
+    .why p,
+    .faq h2 {
+      font-family: "Fraunces", "Iowan Old Style", Palatino, "Palatino Linotype", Georgia, "Times New Roman", serif;
+      font-variant-ligatures: none;
+      font-feature-settings: "liga" 0, "dlig" 0, "clig" 0, "calt" 0;
+      font-variation-settings: "WONK" 0, "SOFT" 0;
+      font-optical-sizing: auto;
+    }
+
+    a { color: var(--navy-mid); }
+
+    .wrap {
+      width: min(40rem, calc(100% - 2.5rem));
+      margin: 0 auto;
+      padding: 2rem 0 3.5rem;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      margin-bottom: 2.75rem;
+    }
+
+    .mark {
+      width: 2.25rem;
+      height: 2.25rem;
+      border-radius: 0.6rem;
+      background: var(--navy);
+      display: grid;
+      place-items: center;
+      flex: none;
+    }
+
+    .mark img {
+      width: 1.28rem;
+      height: 1.28rem;
+      display: block;
+      position: relative;
+      top: 1px; /* optical alignment: the anchor is heavier at the bottom */
+    }
+
+    .wordmark {
+      font-family: Fraunces, "Iowan Old Style", Palatino, Georgia, serif;
+      font-weight: 560;
+      font-size: 1.15rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--navy);
+    }
+
+    h1 {
+      font-family: "Fraunces", "Iowan Old Style", Palatino, "Palatino Linotype", Georgia, "Times New Roman", serif;
+      font-weight: 560;
+      font-size: clamp(2.05rem, 8vw, 3.15rem);
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin: 0 0 0.9rem;
+      color: var(--navy-deep);
+      font-variant-ligatures: none;
+      font-feature-settings: "liga" 0, "dlig" 0, "clig" 0, "calt" 0;
+      font-variation-settings: "WONK" 0, "SOFT" 0, "opsz" 48;
+    }
+
+    .lede {
+      margin: 0 0 1.75rem;
+      color: var(--muted);
+      font-size: 1.125rem;
+      max-width: 32rem;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+      margin: 0 0 2.75rem;
+    }
+
+    label.email-label {
+      font-size: 0.92rem;
+      font-weight: 500;
+      color: var(--navy);
+    }
+
+    .row {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    input[type="email"] {
+      width: 100%;
+      border: 1px solid #c9c4ba;
+      background: var(--white);
+      color: var(--ink);
+      border-radius: 0.55rem;
+      padding: 0.85rem 0.95rem;
+      font: inherit;
+      font-size: 1rem;
+    }
+
+    input[type="email"]:focus {
+      outline: 2px solid var(--focus);
+      outline-offset: 1px;
+      border-color: var(--focus);
+    }
+
+    button {
+      border: 0;
+      background: var(--navy);
+      color: var(--white);
+      font: inherit;
+      font-weight: 600;
+      font-size: 1rem;
+      border-radius: 0.55rem;
+      padding: 0.9rem 1.15rem;
+      cursor: pointer;
+    }
+
+    button:hover { background: var(--navy-mid); }
+
+    button:focus {
+      outline: 2px solid var(--focus);
+      outline-offset: 2px;
+    }
+
+    .form-note, .form-status {
+      margin: 0;
+      font-size: 0.88rem;
+      color: var(--muted);
+    }
+
+    .form-status[data-visible="true"] {
+      color: var(--navy);
+    }
+
+    .benefits {
+      list-style: none;
+      margin: 0 0 2.5rem;
+      padding: 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .benefits li {
+      padding: 1.15rem 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .benefits h2 {
+      font-family: Fraunces, "Iowan Old Style", Palatino, Georgia, serif;
+      font-size: 1.2rem;
+      font-weight: 560;
+      margin: 0 0 0.3rem;
+      color: var(--navy-deep);
+    }
+
+    .benefits p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .why {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 0.85rem;
+      padding: 1.25rem 1.25rem 1.3rem;
+      margin: 0 0 2.75rem;
+    }
+
+    .why h2 {
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--navy-mid);
+      margin: 0 0 0.55rem;
+    }
+
+    .why p {
+      margin: 0;
+      font-family: Fraunces, "Iowan Old Style", Palatino, Georgia, serif;
+      font-size: 1.15rem;
+      line-height: 1.45;
+      color: var(--navy-deep);
+    }
+
+    .faq h2 {
+      font-family: Fraunces, "Iowan Old Style", Palatino, Georgia, serif;
+      font-size: 1.35rem;
+      font-weight: 560;
+      margin: 0 0 0.75rem;
+      color: var(--navy-deep);
+    }
+
+    .faq details {
+      border-top: 1px solid var(--line);
+      padding: 0.85rem 0;
+    }
+
+    .faq details:last-of-type {
+      border-bottom: 1px solid var(--line);
+    }
+
+    .faq summary {
+      cursor: pointer;
+      font-weight: 600;
+      color: var(--navy);
+      list-style: none;
+    }
+
+    .faq summary::-webkit-details-marker { display: none; }
+
+    .faq summary::after {
+      content: "+";
+      float: right;
+      font-weight: 400;
+      color: var(--muted);
+    }
+
+    .faq details[open] summary::after { content: "-"; }
+
+    .faq details p {
+      margin: 0.5rem 0 0.15rem;
+      color: var(--muted);
+    }
+
+    footer {
+      margin-top: 2.75rem;
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+
+    header a.brand {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    button:disabled {
+      opacity: 0.7;
+      cursor: wait;
+    }
+
+    .hp {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+    @media (min-width: 620px) {
+      .wrap { padding-top: 2.75rem; }
+
+      .row {
+        flex-direction: row;
+        align-items: stretch;
+      }
+
+      input[type="email"] { flex: 1; }
+
+      button { width: auto; white-space: nowrap; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <a class="brand" href="../">
+      <div class="mark" aria-hidden="true">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAYAAADDPmHLAAAO2klEQVR42u1dW5BcRRn+u8+ZJbPJUgG2QkRFIQoJ0USJglBeA5YpEVAsRMAqy/LyoOWDV4qyIPqC+qIPFFjxrogUeCnRRKAgWSyhFAhCyYpRNDELmyjZsMvO7syc0/3350O6N53DzOzMzmSu/VVN7exczvTp/+v/2heigICAgICAgICAgIDBghjEmwYgiEj6LxERhBAIBOhfoUsrdK4maO8zRghhAgH6R/DkC3RmZuak4eHh1+RyuWVERGmazgwNDf1bCFH0vhdZIiAQoHeFHwkh2Ap5kxDiMinlRUS0Vkp5ivc5EkI8S0R7mHlHFEW/FULsy14joIdsvB3BVC6Xz9Fa/xIvhQHA9pHFHDPfWigUTiUiGhsbi0Ov9pbwJRGR1vqLzFz2BK4AaPu8Ehm0/QwAgJkPKqUu90xCQK8IXyn1A0/AGo3B+ERI0/QLQRP0AJyAlFK3ONlVGO2NwGkFzM/PfyZogi53+OzfG63wklojnJmduq9mFippg0sDCbo41CsUChsAaCvcagKtZQ50DU1gAEwCGAUgbTKp59EvNk0QEeXz+W8QUSSl5CohLogoMsYcNsbsjOP4aSKSxpjzpJTvIKI8ERk6NktI9n9NRKcR0ZeEENdZLRDCw24Z/UmSvNEYgyphnXGjm5m/efDgwVXZ65RKpTXMfFcNTWDsY/rFF188xTmdQQKdJ4Bz/L5lBaWqqHDMzc19zPcZAMT2sWDTkyT5Vg0SaABIkuTaEBV0T9gniIiYeXcVwbmR/xP7nZzTGlknEoDcunWrBFDtWgqAUUrdHpzBLlL/AFYDmPdUdVZtF0ul0hrrvMnFtAmAD1QhAFsyPZklYEBn7f96z/abCgL7SyMapVAorAJQyF6PmY39+99Dhw6N9IMfIPvB+5dSvtbeS9b7N0RE5XL5Gb8+UPViQpAQAiMjI1NKqWe9yIHs77i/o6Ojo6v8NgQCdBZFKyhRiSBDQ0On2rJuXTX+qampFV618CUCNsYcQ4yAzvsAa6qYAKeyp6anp1cuZrOtIyiSJHmDl/x5iQ8AYHJycnI4hIJdQoCZmZmTmfmFCgTwHbnP2e8M1bjekI0otlUKKZn5GJ8iOIFdRII0TXf5CZ8Kpd4CgNd7oWDkogKXE7DvXVrlOgthIDPf6kcNAV2QCGLmr9ZIBDlTMAHgkmrX0lpfC2DWCx+r1QquCHmA7vMDzgJQrmK7s+HcrwBcBeBNAN6UJMk1zLyz0mezBSGt9YGDBw8uD/a/u0jgSsHfq6EFUIMc9byv7OSQvpoXIPpJCxDRKmPMuJTypEXCXM6878LDqMbnI631Y3EcX0ADvI6g67VAuVz+YItmA/l2n7XWM+VyeV2GcAFdagq+5ql0bkL4C6ZEKXVZcPx6iARa6+s8DaCWOimUmafK5fIlQfi9qQneycx/W7Lu13oHgDVB+D2cH5icnBwG8HkApTp8Ahf/HwBwZZZQAT1KAvt8skaMn0303OsE3+8OX7+nMtkma1Y0GPLm7KhHv68S7vtwxsbqjc7exaAsCA3x7IAjECAQICAQICAQICAQICAQICAQICAQICAQICAQICAQICAQICAQICAQICAQICAQICAQICAQICAQICAQICAQIKAP0LJ1AdnVM+GcndbBrm2I6OjOZC1brxC3qIEyK3C3e0ZYQ9+88G0f6gp93jQJZIuEbwBcDOA3zLw9SZIPCyEghEBYS99038LuX/wpZt7BzLcVCoUNts9lpxsYEREppS55ycJ6pW4HsMLdSAdVJwEYtgs+610b+EAn2+337f79+09i5l2Z7eqmAWzwz0jqSOfaxzAz7/WOadF2dw4AeAjAiZ3qzF4lgBP++Pj4aqXUo5m+LVsS/KGjJPXW4F9VZWdtR4KHAYx0orG9SABvv8K1Sql/V9ngwrXzwkoOeLt8AEFEpLW+3HqnWWcvZx2XC4noXgAj1m6FtfY1hC+E0ADWEtHOOI7PtH2YddZh+/59vizaRgA7snhsbCwWQpxrGyCrRBlZEnAgQU3hryOinXTkfCKuEqk5zbbRJ0RbvVMiomKxeLqzSfa8npqbLTHzY4cOHTrNV3XBBByj9td5G1noRfYzBDP/yx1b09ZNK71NmjfV0anZjRafnJ6efnWztqtfCLAE4S8MNmYuFYvF05tp61JvUBIRLV++/NX2/3qyfjER6Vwut3HlypUPAVg76OYgY/Mf8NT+ogdbEBFJKZdJKZd3LBFkjFm5hMyjJqKXE9EuAOssCeQACl96wt9Vr/A9MBFRFEVrmnEEm+r4OI7PWcrXbONfZoy5b3Z2dvRIfwzOxste9vRs6/C9rEHhLzh+cRyPdIwAUsqlep8RESkp5Svz+fwtNaKIvlb/xpgf2JGvGxT+UTXA3FQ9oBOd7m/apOM4fi8RDVtTIAZA8MIWcUaklG8mIuUsKtD4eIqi5lyoThDAlTZzRBRrrbcJIeYARINQOfQKZAVjzL2uH4hIOueunYjbPPLJGDMH4K9CiGellL/P5XK32ZFvaHAA6wBeqZT6ZBRFbwVwthBinZTyBGrjNv5NEcAYI9xZenV6rbEx5uZcLveV7KgYJPvv7lcIkRLRLfZBSqmfSymvpsrp31oatTMmIE3TPY3+VhzH7wdwAoChQT90yVZThwDkisXi6XEcb7aasm7DrrXWHSNAHMcvUP15aHey5zlEdINl/0DDHWYphFBDQ0PfJqJTrSmsZ1THRERJkjzjFHI7CWDsj++zjY2zCYpaJDDGXJ+m6TusHezGTKBokwaIhRBaa/3xKIquWCQcXIieXLRgjEmklC90QgOAiGj58uXPEdEcHS0HL6a+BBEJKaWMougndrJIO6aNgRqrmHEbhB/ZAfC6KIpusYNqsb6LrMYw9n72bt++/YB1ojtTEdRaP+jNWEGapj9l5rSOc3jAzDtdZxyPHIC75tTU1InM/L86ikFsD4p4/Hi1yfWdfazwDrTgGmcYQGv9fJqmP7avley0u9ucJumEAxMBEEqpzU7gSZJ8x773RI3TN7Pn8bhTOHOtVr2OpOVyeZ079rWOAyMA4ODExETeJ1GLHb/IOtF324Gg6yil324zfzvt/4eSJFnf8XmB9kbO01pf6V7TWl9dT1nT3VyxWPyCR4KWEwDABQ2UrQFgvlgsvqrVBPCFD+A7dZ5n5Ij7dvu9ZfZktDXHg6BL7mTvBuW2bdtyWuun7Tm7XM/hTAA+02pz4NXaP9rA4VHGkvIC154Wqn3RoPDdALq/Ulu6popqby72O71YLH6kTi2wYCqKxeINvolpFQGY+eYGCOA+82VL6LhV7RgfHx9SSn23gba4vnubPzi6/igbAHL37t05AE95p3fXRQIA3weQb4VzA0Bs3bpVMvO4f/x7TX1r7bHW+u5WENHdw8TExMnMPNao8LXWO1qpidrmINrU5nvq1AKu853D87CdKLHgMS+1DaVSaXOdJDzm5DCtdWF+fv4VS3WyfFMG4O1a6380aIY0ADU7O7vO9x16kQR3NkICr4NmkyT5eKZDZb0j31P/uxr8/QUtoJRyUc1Qg4KXRERjY2MxgBu9e2qoD5RSN/Xc6M/GuoVCYRUzP9/gMa7aO7zxvvn5+U1Zf8N3qioIIGeff75R4fttMMZAKXWpI0ElAjoNYbN6C68rpbYw8yMVvHnU6fX/c2JiIl/tPnuFBC5ffWVmtRAaUINOgLclSXJuFYHHWX9Ba/1p77tLOUTamY2CUmpLVrs4EmbbUyqVNjPzjgyZTQO/qQDw/Pz8eT07+iuZAmb+0RLP8dWeamZmfhDAZ0ul0plZAVjhXADgl95oauYEcf+7N5fL5bXZ+9u3b9+yJEleB2ArgN2ZkdzowdWp1XrXt0v4og0EEEQkDxw4cMLq1at3SSnPp8YnQFL2O8aYlIj2SimfsvUIaYx5o5Ryg5f/b8X9wesrxcyPRFHkKnCrjDHrieh0eXRiBOrI61eCJqKYmX8Rx/GHrEbj4z1Xol1VLymEMIcPH37lypUr/yylPM12klyCMFwhJK6XLC3CYtfU9n6WEp874T8aRdHFRDRPR2YNoec1QKb6xXNzcxvz+fwjUsohK8hmKpKOEA6Sju88R5+Arv/8RzPEOnD48OHzR0dHn2vV7h9dRQDnFNoS6KVE9Gs6uu/NoO4isiB8IrpICLHHDZR2NaCtHW+FHwshfkdEV3hmYBA3lNKdFj51YuT5JCiXy+/RWj9vO0IPmPBjItrfSeF3hAA+CfL5/E5mfpcx5hk6um6wnwFP+A/Pzc2d30nhd4wAPgmWLVv2dKFQeAsz32M7JuvY9ZO9F3RkavwPiWjLyMjI/zop/K5KFNnnN1WoCfQ6jDerZ15r/Qk/PKaAo/l0IiKl1LuZ+alKmcAehF/T+COADY70g7QauqEw0f7NM/PXvQ7kHiOC39YXtdbXeaXhOEi6TpOQpukmZt6eya/rJvP7x13VOxIw84+np6fPyGq5gPpMwgIRlFJbANxfoWbOnRa6nWWkMgWrO/zKZdgVbelEOGY2kFJqs1LqDjdzKFtCbZNmcGXirJM6zcy3ZgXf7aNe9JBZMK44kiTJ+jiOryWiy6SU6yuEW64SKJu8R2QebnXOwm8ZYx6RUv6GiO4UQkx47UW78vkD5R/4I+quu+6KisXihQBuYuYnakz61EsY5dW+UwawO03T6wuFwvpa7esFiB4lgqQjO2ockzlMkmR9FEWvF0K8lYg2EtFZUspVzfyUMWaSiP5ujPkTET2utR7P5/N7fX+Fjl2zF9BuZ7FaaDUzM3NSmqabAFwDYLaB+Xh7AFxml14NVwtZg1ffnU6jmyMoMu8918BOofdUuG7ciyp+MfRVUiKrgj1hrWjwXvPWkRN0ZFqWoT7dw6ivVZi3jr7IzFO0+D4BICJjjHnWFmjQ7/sXDYINi4QQWgixy43oRQggPRMQ8vV94hcIAGd4jmDq+QLGPhL7/1/t7uIyFGz6iAT275ZFooF/AnhNxn8I6DMSnAXgZ8z8X28d4H+Y+dsATg7CHwAS2Ocnzs3NnVsul9e65ehB+AOUK6jw+kBO0hADTAR/MQfCEbcBAQEBAQEBAQEBAYOB/wO6fFWuEspX9AAAAABJRU5ErkJggg==" width="20" height="20" alt="">
+      </div>
+      <div class="wordmark">Harbor</div>
+      </a>
+    </header>
+
+    <main>
+      <h1>The family's day,<br>in one place.</h1>
+      <p class="lede">Harbor is an iPhone app for the parent who already holds the calendar, the meals, and the lists.</p>
+
+      <form id="waitlist-form" action="#" method="post" novalidate>
+        <label class="hp" for="website">Company</label>
+        <input class="hp" type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+        <label class="email-label" for="email">Email address</label>
+        <div class="row">
+          <input id="email" name="email" type="email" autocomplete="email" required placeholder="you@example.com">
+          <button type="submit">Join the waitlist</button>
+        </div>
+        <p class="form-note">No account is created yet. We’ll email you when a public beta is ready. Price is not set.</p>
+        <p class="form-status" id="form-status" hidden data-visible="false" role="status" aria-live="polite"></p>
+      </form>
+
+      <ul class="benefits">
+        <li>
+          <h2>See today at a glance</h2>
+          <p>The Daily Brief, and an optional lock screen widget, show what’s next so the day is not stuck in one person’s head.</p>
+        </li>
+        <li>
+          <h2>Share one family calendar</h2>
+          <p>Import a .ics file, or connect Google Calendar (read-only; this may require Harbor Pro). Both adults in the household can see the same plan. Outlook is not supported yet.</p>
+        </li>
+        <li>
+          <h2>Keep the rest of the week together</h2>
+          <p>Tasks and chores, weekly meals and recipes, the grocery list, bills, subscriptions, and a simple budget live in one app.</p>
+        </li>
+      </ul>
+
+      <section class="why" aria-labelledby="why-title">
+        <h2 id="why-title">Why I built it</h2>
+        <p>I built Harbor as a stay-at-home dad of three. I wanted our household’s day to live in one place, not across texts, notes, and my own memory.</p>
+      </section>
+
+      <section class="faq" aria-labelledby="faq-title">
+        <h2 id="faq-title">Questions</h2>
+        <details>
+          <summary>Is this iPhone only?</summary>
+          <p>Yes. Harbor is an iOS app, and there is no Android version right now. It is in TestFlight beta.</p>
+        </details>
+        <details>
+          <summary>Can I bring in an existing calendar?</summary>
+          <p>Yes. You can import a .ics file from Life → Schedule → Manage → Sync calendars, or connect Google Calendar (read-only; this may require Harbor Pro). Harbor does not connect Outlook. To-dos, groceries, and recipes are entered by hand for now.</p>
+        </details>
+        <details>
+          <summary>How much does it cost?</summary>
+          <p>The price is not set yet. If you join the waitlist, we will tell you the price before anything is charged.</p>
+        </details>
+        <details>
+          <summary>What about our family’s privacy?</summary>
+          <p>Your household’s calendar, lists, and bills belong to your household. We do not sell your data.</p>
+        </details>
+      </section>
+    </main>
+
+    <footer>
+      Harbor is in TestFlight beta. A public beta is coming later.
+    </footer>
+  </div>
+
+  <script>
+    (function () {
+      var ENDPOINT = "https://dyaicsnoefkfshesyogk.supabase.co/rest/v1/waitlist";
+      var ANON_KEY = "sb_publishable_NZrMg-ECCTtmrt2zX0cVJg_eDs-B-yT";
+      var form = document.getElementById("waitlist-form");
+      var status = document.getElementById("form-status");
+      var button = form ? form.querySelector('button[type="submit"]') : null;
+      if (!form || !status) return;
+
+      function show(message) {
+        status.hidden = false;
+        status.setAttribute("data-visible", "true");
+        status.textContent = message;
+      }
+
+      form.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        var honeypot = form.querySelector('input[name="website"]');
+        if (honeypot && honeypot.value) {
+          show("You’re on the list. We’ll email you when a public beta is ready.");
+          form.reset();
+          return;
+        }
+
+        var email = (form.email.value || "").trim();
+        if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+          show("Please enter a valid email address.");
+          return;
+        }
+
+        if (button) button.disabled = true;
+        show("Joining the waitlist…");
+
+        fetch(ENDPOINT, {
+          method: "POST",
+          headers: {
+            "apikey": ANON_KEY,
+            "Authorization": "Bearer " + ANON_KEY,
+            "Content-Type": "application/json",
+            "Prefer": "return=minimal"
+          },
+          body: JSON.stringify({ email: email, source: "waitlist_page" })
+        }).then(function (res) {
+          if (res.ok) {
+            show("You’re on the list. We’ll email you when a public beta is ready.");
+            form.email.value = "";
+            return;
+          }
+          return res.json().catch(function () { return {}; }).then(function (body) {
+            var code = body && body.code;
+            if (res.status === 409 || code === "23505") {
+              show("You’re already on the list.");
+            } else {
+              show("Something went wrong. Please try again in a moment.");
+            }
+          });
+        }).catch(function () {
+          show("Something went wrong. Please try again in a moment.");
+        }).then(function () {
+          if (button) button.disabled = false;
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
