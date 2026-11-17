@@ -65,7 +65,8 @@
     .wordmark,
     h1,
     .benefits h2,
-    .why p {
+    .why p,
+    .how h2 {
       font-family: "IBM Plex Serif", Georgia, "Times New Roman", serif;
       font-variant-ligatures: none;
       font-feature-settings: "liga" 0, "dlig" 0, "clig" 0, "calt" 0;
@@ -214,6 +215,22 @@
       color: var(--navy-deep);
     }
 
+    .how {
+      margin: 0 0 2.75rem;
+    }
+
+    .how h2 {
+      font-size: 1.35rem;
+      font-weight: 600;
+      margin: 0 0 0.75rem;
+      color: var(--navy-deep);
+    }
+
+    .how p {
+      margin: 0;
+      color: var(--muted);
+    }
+
     footer {
       margin-top: 0.25rem;
       color: var(--muted);
@@ -242,7 +259,13 @@
       <p class="lede">Harbor is an iPhone app for the parent who already holds the calendar, the meals, and the lists.</p>
 
       <a class="cta" href="waitlist/">Join the waitlist</a>
-      <p class="cta-note">No account is created yet. We’ll email you when a public beta is ready. Price is not set.</p>
+      <p class="cta-note">No account is created yet. We’ll email you a TestFlight invite within a couple of days. The beta is free; the price is not set.</p>
+
+
+      <section class="how" aria-labelledby="how-title">
+        <h2 id="how-title">How the beta works</h2>
+        <p>Harbor is in a free TestFlight beta for iPhone. <a href="waitlist/">Join the waitlist</a> and you’ll get a TestFlight invite by email within a couple of days, or join now: <a href="https://testflight.apple.com/join/psjNQTb4">testflight.apple.com/join/psjNQTb4</a>. Use it for two to three weeks, then send feedback by replying to the invite, emailing <a href="mailto:harboradmin@gmail.com">harboradmin@gmail.com</a>, or using TestFlight’s built-in feedback (screenshot and send). You can stop anytime. The price is not set.</p>
+      </section>
 
       <ul class="benefits">
         <li>
@@ -266,7 +289,7 @@
     </main>
 
     <footer>
-      Harbor is in TestFlight beta. A public beta is coming later. <a href="waitlist/">Join the waitlist</a>.
+      Harbor is in a free TestFlight beta. <a href="waitlist/">Join the waitlist</a>.
     </footer>
   </div>
 </body>
